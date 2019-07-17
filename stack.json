@@ -2,7 +2,7 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "AWS CloudFormation Template to create VPC reources includeing VPC itself, 2 public Subnets, 2 private Subnets, 1 Internet Gateway and 1 Public Route Table.",
   "Resources": {
-    "VPC": {
+    "Vpc": {
       "Type": "AWS::EC2::VPC",
       "Properties": {
         "CidrBlock": {
@@ -47,7 +47,7 @@
           ]
         },
         "VpcId": {
-          "Ref": "VPC"
+          "Ref": "Vpc"
         },
         "Tags": [
           {
@@ -76,7 +76,7 @@
           ]
         },
         "VpcId": {
-          "Ref": "VPC"
+          "Ref": "Vpc"
         },
         "Tags": [
           {
@@ -105,7 +105,7 @@
           ]
         },
         "VpcId": {
-          "Ref": "VPC"
+          "Ref": "Vpc"
         },
         "Tags": [
           {
@@ -134,7 +134,7 @@
           ]
         },
         "VpcId": {
-          "Ref": "VPC"
+          "Ref": "Vpc"
         },
         "Tags": [
           {
@@ -165,11 +165,11 @@
         ]
       }
     },
-    "VPCGatewayAttachment": {
+    "VpcGatewayAttachment": {
       "Type": "AWS::EC2::VPCGatewayAttachment",
       "Properties": {
         "VpcId": {
-          "Ref": "VPC"
+          "Ref": "Vpc"
         },
         "InternetGatewayId": {
           "Ref": "InternetGateway"
@@ -180,7 +180,7 @@
       "Type": "AWS::EC2::RouteTable",
       "Properties": {
         "VpcId": {
-          "Ref": "VPC"
+          "Ref": "Vpc"
         },
         "Tags": [
           {
@@ -211,7 +211,7 @@
           "Ref": "InternetGateway"
         }
       },
-      "DependsOn": "VPCGatewayAttachment"
+      "DependsOn": "VpcGatewayAttachment"
     },
     "PublicSubnetRouteTableAssociation001": {
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
@@ -264,9 +264,9 @@
     }
   },
   "Outputs": {
-    "VPC": {
+    "Vpc": {
       "Value": {
-        "Ref": "VPC"
+        "Ref": "Vpc"
       }
     },
     "PublicSubnet01": {
