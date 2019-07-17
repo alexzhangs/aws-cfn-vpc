@@ -288,6 +288,11 @@
       "Value": {
         "Ref": "PrivateSubnet02"
       }
+    },
+    "PublicRouteTable": {
+      "Value": {
+        "Ref": "PublicRouteTable"
+      }
     }
   }
 }
