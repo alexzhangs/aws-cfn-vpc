@@ -5,9 +5,7 @@
     "Vpc": {
       "Type": "AWS::EC2::VPC",
       "Properties": {
-        "CidrBlock": {
-          "Ref": "VpcCidrBlock"
-        },
+        "CidrBlock": {"Ref": "VpcCidrBlock"},
         "EnableDnsSupport": "true",
         "EnableDnsHostnames": "true",
         "Tags": [
@@ -22,23 +20,9 @@
       "Type": "AWS::EC2::Subnet",
       "Properties": {
         "MapPublicIpOnLaunch": "true",
-        "CidrBlock": {
-          "Fn::Select": [
-            "0",
-            {
-              "Ref": "SubnetCidrBlocks"
-            }
-          ]
-        },
-        "AvailabilityZone": {
-          "Fn::Select": [
-            "0",
-            { "Fn::GetAZs" : { "Ref" : "AWS::Region" } }
-          ]
-        },
-        "VpcId": {
-          "Ref": "Vpc"
-        },
+        "CidrBlock": {"Fn::Select": ["0", {"Ref": "SubnetCidrBlocks"}]},
+        "AvailabilityZone": {"Fn::Select": ["0", {"Fn::GetAZs": {"Ref": "AWS::Region"}}]},
+        "VpcId": {"Ref": "Vpc"},
         "Tags": [
           {
             "Key": "Name",
@@ -51,23 +35,9 @@
       "Type": "AWS::EC2::Subnet",
       "Properties": {
         "MapPublicIpOnLaunch": "true",
-        "CidrBlock": {
-          "Fn::Select": [
-            "1",
-            {
-              "Ref": "SubnetCidrBlocks"
-            }
-          ]
-        },
-        "AvailabilityZone": {
-          "Fn::Select": [
-            "1",
-            { "Fn::GetAZs" : { "Ref" : "AWS::Region" } }
-          ]
-        },
-        "VpcId": {
-          "Ref": "Vpc"
-        },
+        "CidrBlock": {"Fn::Select": ["1", {"Ref": "SubnetCidrBlocks"}]},
+        "AvailabilityZone": {"Fn::Select": ["1", {"Fn::GetAZs": {"Ref": "AWS::Region"}}]},
+        "VpcId": {"Ref": "Vpc"},
         "Tags": [
           {
             "Key": "Name",
@@ -80,23 +50,9 @@
       "Type": "AWS::EC2::Subnet",
       "Properties": {
         "MapPublicIpOnLaunch": "false",
-        "CidrBlock": {
-          "Fn::Select": [
-            "2",
-            {
-              "Ref": "SubnetCidrBlocks"
-            }
-          ]
-        },
-        "AvailabilityZone": {
-          "Fn::Select": [
-            "0",
-            { "Fn::GetAZs" : { "Ref" : "AWS::Region" } }
-          ]
-        },
-        "VpcId": {
-          "Ref": "Vpc"
-        },
+        "CidrBlock": {"Fn::Select": ["2", {"Ref": "SubnetCidrBlocks"}]},
+        "AvailabilityZone": {"Fn::Select": ["0", {"Fn::GetAZs": {"Ref": "AWS::Region"}}]},
+        "VpcId": {"Ref": "Vpc"},
         "Tags": [
           {
             "Key": "Name",
@@ -109,23 +65,9 @@
       "Type": "AWS::EC2::Subnet",
       "Properties": {
         "MapPublicIpOnLaunch": "false",
-        "CidrBlock": {
-          "Fn::Select": [
-            "3",
-            {
-              "Ref": "SubnetCidrBlocks"
-            }
-          ]
-        },
-        "AvailabilityZone": {
-          "Fn::Select": [
-            "1",
-            { "Fn::GetAZs" : { "Ref" : "AWS::Region" } }
-          ]
-        },
-        "VpcId": {
-          "Ref": "Vpc"
-        },
+        "CidrBlock": {"Fn::Select": ["3", {"Ref": "SubnetCidrBlocks"}]},
+        "AvailabilityZone": {"Fn::Select": ["1", {"Fn::GetAZs": {"Ref": "AWS::Region"}}]},
+        "VpcId": {"Ref": "Vpc"},
         "Tags": [
           {
             "Key": "Name",
@@ -148,20 +90,14 @@
     "VpcGatewayAttachment": {
       "Type": "AWS::EC2::VPCGatewayAttachment",
       "Properties": {
-        "VpcId": {
-          "Ref": "Vpc"
-        },
-        "InternetGatewayId": {
-          "Ref": "InternetGateway"
-        }
+        "VpcId": {"Ref": "Vpc"},
+        "InternetGatewayId": {"Ref": "InternetGateway"}
       }
     },
     "PublicRouteTable": {
       "Type": "AWS::EC2::RouteTable",
       "Properties": {
-        "VpcId": {
-          "Ref": "Vpc"
-        },
+        "VpcId": {"Ref": "Vpc"},
         "Tags": [
           {
             "Key": "Name",
@@ -174,35 +110,23 @@
       "Type": "AWS::EC2::Route",
       "Properties": {
         "DestinationCidrBlock": "0.0.0.0/0",
-        "RouteTableId": {
-          "Ref": "PublicRouteTable"
-        },
-        "GatewayId": {
-          "Ref": "InternetGateway"
-        }
+        "RouteTableId": {"Ref": "PublicRouteTable"},
+        "GatewayId": {"Ref": "InternetGateway"}
       },
       "DependsOn": "VpcGatewayAttachment"
     },
     "PublicSubnetRouteTableAssociation001": {
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
       "Properties": {
-        "RouteTableId": {
-          "Ref": "PublicRouteTable"
-        },
-        "SubnetId": {
-          "Ref": "PublicSubnet02"
-        }
+        "RouteTableId": {"Ref": "PublicRouteTable"},
+        "SubnetId": {"Ref": "PublicSubnet02"}
       }
     },
     "PublicSubnetRouteTableAssociation002": {
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
       "Properties": {
-        "RouteTableId": {
-          "Ref": "PublicRouteTable"
-        },
-        "SubnetId": {
-          "Ref": "PublicSubnet01"
-        }
+        "RouteTableId": {"Ref": "PublicRouteTable"},
+        "SubnetId": {"Ref": "PublicSubnet01"}
       }
     }
   },
@@ -225,34 +149,22 @@
   },
   "Outputs": {
     "Vpc": {
-      "Value": {
-        "Ref": "Vpc"
-      }
+      "Value": {"Ref": "Vpc"}
     },
     "PublicSubnet01": {
-      "Value": {
-        "Ref": "PublicSubnet01"
-      }
+      "Value": {"Ref": "PublicSubnet01"}
     },
     "PublicSubnet02": {
-      "Value": {
-        "Ref": "PublicSubnet02"
-      }
+      "Value": {"Ref": "PublicSubnet02"}
     },
     "PrivateSubnet01": {
-      "Value": {
-        "Ref": "PrivateSubnet01"
-      }
+      "Value": {"Ref": "PrivateSubnet01"}
     },
     "PrivateSubnet02": {
-      "Value": {
-        "Ref": "PrivateSubnet02"
-      }
+      "Value": {"Ref": "PrivateSubnet02"}
     },
     "PublicRouteTable": {
-      "Value": {
-        "Ref": "PublicRouteTable"
-      }
+      "Value": {"Ref": "PublicRouteTable"}
     }
   }
 }
