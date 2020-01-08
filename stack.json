@@ -13,17 +13,7 @@
         "Tags": [
           {
             "Key": "Name",
-            "Value": {
-              "Fn::Join": [
-                "-",
-                [
-                  {
-                    "Ref": "NS"
-                  },
-                  "VPC"
-                ]
-              ]
-            }
+            "Value": {"Fn::Sub": "${AWS::StackName}-VPC"}
           }
         ]
       }
@@ -150,17 +140,7 @@
         "Tags": [
           {
             "Key": "Name",
-            "Value": {
-              "Fn::Join": [
-                "-",
-                [
-                  {
-                    "Ref": "NS"
-                  },
-                  "IGW"
-                ]
-              ]
-            }
+            "Value": {"Fn::Sub": "${AWS::StackName}-IGW"}
           }
         ]
       }
@@ -185,17 +165,7 @@
         "Tags": [
           {
             "Key": "Name",
-            "Value": {
-              "Fn::Join": [
-                "-",
-                [
-                  {
-                    "Ref": "NS"
-                  },
-                  "PublicRouteTable"
-                ]
-              ]
-            }
+            "Value": {"Fn::Sub": "${AWS::StackName}-PublicRouteTable"}
           }
         ]
       }
@@ -237,16 +207,6 @@
     }
   },
   "Parameters": {
-    "NS": {
-      "Type": "String",
-      "Default": "Foo",
-      "Description": "Enter a Name Space for VPC. Default is Foo."
-    },
-    "NSLowerCase": {
-      "Type": "String",
-      "Default": "foo",
-      "Description": "Lower case of value of NS. Default is 'foo'."
-    },
     "VpcCidrBlock": {
       "Type": "String",
       "Default": "10.0.0.0/16",
